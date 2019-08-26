@@ -5,7 +5,7 @@ Module to block email address at registration process (compatible with Modified 
 Based upon scripts of user [Spegeli](https://spegeli.de/)<br/>
 [Modified Forum Thread](https://www.modified-shop.org/forum/index.php?topic=12360)
 
-This module isn't update secure due the usage of two systemfiles (create_account.php & create_guest_account.php)<br/>
+This module can't be updated safely due the usage of two systemfiles (create_account.php & create_guest_account.php)<br/>
 If you updating your system, make sure these changes are not removed. 
 
 Future: it could be possible, that an autoloader is available. 
@@ -20,8 +20,8 @@ sql/table_email_blacklist.sql<br/>
 sql/table_configuration.sql<br/>
 Hint: SQL statements uses the utf-8 charset; if you have a different charset replace utf-8 by your chosen one<br/>
 3. Copy all files from shoproot to your shop root directory<br/>
-Hint: since Modified Shop 2 you can have a different name for your admin directory<br/>
-If you have modified these files insert behind 
+Hint: since Modified Shop 2 the admin directory could be renamed<br/>
+If you have modified these files insert after
 ```php
 $error = false;
 ````
