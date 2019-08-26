@@ -26,6 +26,9 @@
  */
 function checkEmailBlacklist($email)
 {
+  //Module deactive
+  if ('false' == EMAIL_DOMAIN_BLACKLIST) { return false; }
+  
 	$sql = "SELECT GROUP_CONCAT(blacklist_domain_name SEPARATOR '|') AS domains  FROM " . TABLE_EMAIL_BLACKLIST . ";";
 	$rs = xtc_db_query($sql);	
 	if (xtc_db_num_rows($rs) > 0)

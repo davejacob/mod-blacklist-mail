@@ -105,27 +105,20 @@ require_once DIR_WS_INCLUDES.'head.php';
 $blacklist_query_raw = "SELECT blacklist_id, blacklist_domain_name, date_added, last_modified FROM " . TABLE_EMAIL_BLACKLIST . " ORDER BY blacklist_id ASC";
 $blacklist_split = new splitPageResults($_GET['page'], '20', $blacklist_query_raw, $blacklist_query_numrows);
 $blacklist_query = xtc_db_query($blacklist_query_raw);
-while ($blacklist = xtc_db_fetch_array($blacklist_query)) 
+while ($blacklist_row = xtc_db_fetch_array($blacklist_query)) 
 {	
-  if ( $blacklist_id == $blacklist['blacklist_id'] && !isset($bInfo) && substr($action, 0, 3) != 'new') 
-  {  	
-    $blacklist_numbers_query = xtc_db_query("SELECT COUNT(*) AS blacklist_count FROM " . TABLE_EMAIL_BLACKLIST . " WHERE blacklist_id=" . (int)$blacklist['blacklist_id'] . ";");
-    $blacklist_numbers = xtc_db_fetch_array($blacklist_numbers_query);
-    $bInfo_array = xtc_array_merge($blacklist, $blacklist_numbers);
-    $bInfo = new objectInfo($bInfo_array);    
-  }
-
-  if ( (is_object($bInfo)) && ($blacklist['blacklist_id'] == $bInfo->blacklist_id) ) 
-  {
-    echo '<tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $blacklist['blacklist_id'] . '&action=edit') . '\'">' . PHP_EOL;
+  if ($blacklist_id == $blacklist_row['blacklist_id']) 
+  { 
+    $bInfo = new objectInfo($blacklist_row);  
+    echo '<tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'pointer\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $blacklist_row['blacklist_id'] . '&action=edit') . '\'">' . PHP_EOL;
   } 
   else 
   {
-    echo '<tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $blacklist['blacklist_id']) . '\'">' . PHP_EOL;
-  }  
+    echo '<tr class="dataTableRow" onmouseover="this.className=\'dataTableRowOver\';this.style.cursor=\'pointer\'" onmouseout="this.className=\'dataTableRow\'" onclick="document.location.href=\'' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $blacklist_row['blacklist_id']) . '\'">' . PHP_EOL;
+  }      
 ?>								
-									<td class="dataTableContent"><?php echo $blacklist['blacklist_domain_name']; ?></td>
-									<td class="dataTableContent" align="right"><?php if ( (is_object($bInfo)) && ($blacklist['blacklist_id'] == $bInfo->blacklist_id) ) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $blacklist['blacklist_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
+									<td class="dataTableContent"><?php echo $blacklist_row['blacklist_domain_name']; ?></td>
+									<td class="dataTableContent" align="right"><?php if ($blacklist_row['blacklist_id'] == $blacklist_id) { echo xtc_image(DIR_WS_IMAGES . 'icon_arrow_right.gif', ICON_ARROW_RIGHT); } else { echo '<a href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $blacklist_row['blacklist_id']) . '">' . xtc_image(DIR_WS_IMAGES . 'icon_info.gif', IMAGE_ICON_INFO) . '</a>'; } ?>&nbsp;</td>
 								</tr>
 <?php } ?>								
 							</table>
@@ -134,7 +127,7 @@ while ($blacklist = xtc_db_fetch_array($blacklist_query))
 	             	
 <?php if ($action != 'new') { ?>
 							<div class="clear"></div>
-							<div class="smallText pdg2 flt-r"><?php echo '<a class="button" onclick="this.blur();" href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&action=new') . '">' . BUTTON_INSERT . '</a>'; ?></div>		             
+							<div class="smallText pdg2 flt-r"><?php echo '<a class="button" onclick="this.blur();" href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $blacklist_id . '&action=new') . '">' . BUTTON_INSERT . '</a>'; ?></div>		             
 <?php } ?>	             	
 	            <div class="clear"></div> 	             		             	          		    
 <?php
@@ -147,14 +140,14 @@ switch ($action)
     $contents = array('form' => xtc_draw_form('blacklisted', FILENAME_EMAIL_BLACKLIST, 'action=insert', 'post', 'enctype="multipart/form-data"'));
     $contents[] = array('text' => TEXT_NEW_INTRO);
     $contents[] = array('text' => '<br /><label for="blacklist_domain_name">' . TEXT_BLACKLIST_EMAIL_DOMAIN . '</label>' . xtc_draw_input_field('blacklist_domain_name','','id="blacklist_domain_name"',true));
-    $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="button" onclick="this.blur();" value="' . BUTTON_SAVE . '"/> <a class="button" onclick="this.blur();" href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $_GET['bID']) . '">' . BUTTON_CANCEL . '</a>');       
+    $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="button" onclick="this.blur();" value="' . BUTTON_SAVE . '"/> <a class="button" onclick="this.blur();" href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $blacklist_id) . '">' . BUTTON_CANCEL . '</a>');       
     break;
   case 'edit':
     $heading[] = array('text' => '<b>' . TEXT_HEADING_EDIT_BLACKLIST_EMAIL_DOMAIN . '</b>');
     $contents = array('form' => xtc_draw_form('blacklisted', FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $bInfo->blacklist_id . '&action=save', 'post', 'enctype="multipart/form-data"'));
     $contents[] = array('text' => TEXT_EDIT_INTRO);        
     $contents[] = array('text' => '<br /><label for="blacklist_domain_name">' . TEXT_BLACKLIST_EMAIL_DOMAIN . '</label>' . xtc_draw_input_field('blacklist_domain_name', $bInfo->blacklist_domain_name,'id="blacklist_domain_name"',true,'text',false));   
-    $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="button" onclick="this.blur();" value="' . BUTTON_SAVE . '"/> <a class="button" onclick="this.blur();" href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $mInfo->blacklist_id) . '">' . BUTTON_CANCEL . '</a>');        
+    $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="button" onclick="this.blur();" value="' . BUTTON_SAVE . '"/> <a class="button" onclick="this.blur();" href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $bInfo->blacklist_id) . '">' . BUTTON_CANCEL . '</a>');
     break;
   case 'delete':
     $heading[] = array('text' => '<b>' . TEXT_HEADING_DELETE_BLACKLIST_EMAIL_DOMAIN . '</b>');
@@ -164,7 +157,7 @@ switch ($action)
     $contents[] = array('align' => 'center', 'text' => '<br /><input type="submit" class="button" onclick="this.blur();" value="' . BUTTON_DELETE . '"/> <a class="button" onclick="this.blur();" href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $bInfo->blacklist_id) . '">' . BUTTON_CANCEL . '</a>');
     break;
   default:
-    if (isset($bInfo) && is_object($bInfo)) 
+    if (isset($bInfo)) 
     {
       $heading[] = array('text' => '<b>' . $bInfo->blacklist_domain_name . '</b>');
       $contents[] = array('align' => 'center', 'text' => '<a class="button" onclick="this.blur();" href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $bInfo->blacklist_id . '&action=edit') . '">' . BUTTON_EDIT . '</a> <a class="button" onclick="this.blur();" href="' . xtc_href_link(FILENAME_EMAIL_BLACKLIST, 'page=' . $_GET['page'] . '&bID=' . $bInfo->blacklist_id . '&action=delete') . '">' . BUTTON_DELETE . '</a>');

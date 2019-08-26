@@ -36,3 +36,6 @@ define('TEXT_DELETE_INTRO', 'Sind Sie sicher, dass Sie diese Domain l&ouml;schen
 define('BOX_TOOLS_EMAIL_BLACKLIST','eMail Domain Blacklist');
 
 define('WARNING_BLACKLIST_EMPTY', 'Ihre Eingabe darf nicht leer sein.');
+
+define('EMAIL_DOMAIN_BLACKLIST_TITLE', 'eMail Domain Blackliste');
+define('EMAIL_DOMAIN_BLACKLIST_DESC', 'Sollen bestimmte E-Mail Domains blockiert werden?');
