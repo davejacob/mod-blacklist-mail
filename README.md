@@ -25,9 +25,7 @@ If you have modified these files insert behind
 ```php
 $error = false;
 ````
-
-the following code
-
+<br/>the following code<br/>
 ```php
 //E-Mail Blacklistcheck		  
 if (checkEmailBlacklist($email_address)) 
@@ -35,14 +33,13 @@ if (checkEmailBlacklist($email_address))
   $error = true;
   $messageStack->add('create_account', ENTRY_EMAIL_ERROR_DOMAIN_BLACKLIST);  
 }
-</code>
 ```
 4. In Usermanagement set the proper admin rights (check the section tools and activate email_blacklist)
 5. In E-Mail Options -> activate 'Email domain blacklisting', if not all your entered blacklisted values are ignored
 
-##Usage
+<h2>Usage</h2>
 
-###Adding a domain
+<h3>Adding a domain</h3>
 1. Goto Modules -> eMail Domain Blacklist
 2. Add a new one by clicking on the button 'Insert'
 3. Enter the domain or complete email you like to block<br/>
@@ -50,7 +47,7 @@ Hint: you can use a whole email address or parts of them.<br/>
 I.e. foo@foo, foo@foo.tld @foo.tld, @foo, foo@, .tld or foo
 4. Click on the button 'Save'
 
-###Edit a domain
+<h3>Edit a domain</h3>
 1. Goto Modules -> eMail Domain Blacklist
 2. Choose a domain from the listing and click on it
 3. Click on the button 'Edit'
@@ -59,7 +56,7 @@ Hint: A domain must contain minimum 1 char. Remember the less chars your are usi
 I.e. you enter only the char 'e', every email with this char will be blocked. so edgar@foo.tld can't register anymore.
 5. Click on button 'Save'
 
-###Delete a domain
+<h3>Delete a domain</h3>
 1. Goto Modules -> eMail Domain Blacklist
 2. Choose a domain from the listing and click on it
 3. Click on the button 'Delete'
