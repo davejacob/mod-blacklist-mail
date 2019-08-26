@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: create_account.php 10771 2017-06-10 06:45:09Z GTB $
+   $Id: create_account.php 10771 2019-08-26 12:29:00Z dazzen $ 
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -25,7 +25,7 @@
    Copyright (c) 2001,2002 Ian C Wilson http://www.phesis.org
    
    Added email blacklisting
-   Copyright (c) 2011 Spegeli https://spegeli.de (Modified 1.6)
+   Copyright (c) 2008-2016 Spegeli https://spegeli.de (Modified 1.6)
    Copyright (c) 2019 David Jacob https://www.dev-man.de (Modified 2)
 
    Released under the GNU General Public License

@@ -1,6 +1,6 @@
 <?php
 /* -----------------------------------------------------------------------------------------
-   $Id: create_guest_account.php 10639 2017-03-05 15:14:56Z Tomcraft $
+   $Id: create_guest_account.php 10639 2019-08-26 12:29:00Z dazzen $
 
    modified eCommerce Shopsoftware
    http://www.modified-shop.org
@@ -14,7 +14,7 @@
    (c) 2006 XT-Commerce (create_guest_account.php 176 2007-02-15)
    
    Added email blacklisting
-   Copyright (c) 2011 Spegeli https://spegeli.de (Modified 1.6)
+   Copyright (c) 2008-2016 Spegeli https://spegeli.de (Modified 1.6)
    Copyright (c) 2019 David Jacob https://www.dev-man.de (Modified 2)
 
    Released under the GNU General Public License

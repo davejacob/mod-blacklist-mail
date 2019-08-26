@@ -13,7 +13,7 @@
    $Id: blacklist.php,v 1.00 2003/04/10 BMC
 
    Copyright (c) 2003 BMC http://www.mainframes.co.uk (credit card blacklisting)     
-   Copyright (c) 2011 Spegeli https://spegeli.de (Modified 1.6)
+   Copyright (c) 2008-2016 Spegeli https://spegeli.de (Modified 1.6)
    Copyright (c) 2019 David Jacob https://www.dev-man.de (Modified 2)   
    
    Released under the GNU General Public License
