@@ -25,7 +25,7 @@ If you have modified these files insert behind
 ```php
 $error = false;
 ````
-<br/>the following code<br/>
+the following code<br/>
 ```php
 //E-Mail Blacklistcheck		  
 if (checkEmailBlacklist($email_address)) 
