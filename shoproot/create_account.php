@@ -120,11 +120,11 @@ if (isset($_POST['action']) && ($_POST['action'] == 'process')) {
   $error = false;
 
   //E-Mail Blacklistcheck		  
-	if (checkEmailBlacklist($email_address)) 
-	{    	
-		$error = true;
-  	$messageStack->add('create_account', ENTRY_EMAIL_ERROR_DOMAIN_BLACKLIST);  
-	}
+  if (checkEmailBlacklist($email_address)) {    	
+    $error = true;
+    $messageStack->add('create_account', ENTRY_EMAIL_ERROR_DOMAIN_BLACKLIST);  
+  }
+  //E-Mail Blacklistcheck ende
     
   if (ACCOUNT_GENDER == 'true' && $gender == '') {
     $error = true;
